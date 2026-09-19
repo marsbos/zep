@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>mador.js</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-8 bg-gray-50 text-gray-900">
+    <header class="py-4 flex justify-center">
+      mador.js - Reactive DOM for those who don't need a framework.
+    </header>
+    <script type="module">
+      const container = document.getElementById("container");
+      const square = document.getElementById("square");
+      const queryEl = document.getElementById("queryEl");
+
+      import { zep } from "../dist/index.js";
+      import {
+        raf,
+        map,
+        filter,
+        debounce,
+        latest,
+        take,
+      } from "../dist/helpers";
+
+      const c = new AbortController();
+
+      const unsub = zep(window, "scroll", { signal: c.signal })
+        .use(raf())
+        .on((v) => {
+          console.log(window.scrollY);
+        });
+
+      setTimeout(() => {
+        c.abort();
+      }, 3000);
+
+      zep(queryEl, "keydown")
+        .use(
+          filter((e) => e.key === "Escape"), // <= We only want to act on the Escape key
+          take(1), // <= Stop and unsubscribe
+        )
+        .on(() => console.log("escape"));
+
+      zep(queryEl, "input")
+        .use(
+          map((e) => e.target.value.trim()),
+          filter((query) => query.length > 2),
+          debounce(300),
+          latest((query, signal) =>
+            fetch(`https://dummyjson.com/products/search?q=${query}`, {
+              signal,
+            }).then((res) => res.json()),
+          ),
+        )
+        .on((results) => {
+          console.log(results);
+        });
+    </script>
+    <main
+      id="container"
+      class="flex flex-col sm:flex-row items-center justify-center gap-6 max-w-xl mx-auto p-8 bg-slate-200 rounded-md border border-slate-300"
+    >
+      <input id="queryEl" class="relative border-slate-800 border-2" />
+    </main>
+  </body>
+</html>

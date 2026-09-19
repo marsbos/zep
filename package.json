@@ -1,0 +1,58 @@
+{
+  "name": "@marsbos/zep",
+  "version": "1.0.0",
+  "author": {
+    "name": "Marcel Bos"
+  },
+  "description": "Ultra-lightweight zero-dependency event streams and middleware composition without the plumbing.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "unpkg": "./dist/index.js",
+  "jsdelivr": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./helpers": {
+      "types": "./dist/helpers.d.ts",
+      "import": "./dist/helpers.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "event-stream",
+    "reactive",
+    "events",
+    "pipe",
+    "pipeline",
+    "debounce",
+    "throttle",
+    "micro-library",
+    "zero-dependency",
+    "tree-shaking"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "node build.mjs",
+    "format": "prettier --write \"src/**/*.{js,ts,html}\"  \"examples/**/*.{js,ts,html}\"",
+    "format:check": "prettier --check .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "prettier": "^3.8.4",
+    "rimraf": "^6.1.3",
+    "terser": "^5.48.0",
+    "vite": "^8.0.14",
+    "vitest": "^4.1.10"
+  }
+}
