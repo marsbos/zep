@@ -3,7 +3,7 @@
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)
 [![npm version](https://img.shields.io/npm/v/@marsbos/zep?style=flat-square&color=black)](https://www.npmjs.com/package/@marsbos/zep)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/@marsbos/zep?style=flat-square&color=black)](https://bundlephobia.com/package/@marsbos/zep)
-[![license](https://img.shields.io/github/license/marsbos/zep?style=flat-square&color=black)](./LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-black?style=flat-square)](https://github.com/marsbos/zep/blob/main/LICENSE)
 
 #### **Z**ero **E**vent **P**lumbing.
 
